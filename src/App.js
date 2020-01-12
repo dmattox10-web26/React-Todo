@@ -12,7 +12,8 @@ class App extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.deleteTodo = this.deleteTodo.bind(this)
+    this.deleteTodos = this.deleteTodos.bind(this)
+    this.completeTodo = this.completeTodo.bind(this)
   }
   
   handleChange(e) {
@@ -33,8 +34,28 @@ class App extends React.Component {
     })
   }
 
-  deleteTodo(id) {
+  deleteTodos() {
+    this.setState(state => {
+      const todos = this.state.todos.filter(todo => todo.completed === false)
+      return {
+        todos
+      }
+    })
+  }
 
+  completeTodo(id) {
+    this.setState(state => {
+      const todos = this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed
+          return todo
+        }
+        else return todo
+      })
+      return {
+        todos
+      }
+    })
   }
 
   render() {
@@ -52,8 +73,13 @@ class App extends React.Component {
           </Form>
         </Jumbotron>
         { todos.map(todo =>
-            <Todo todo={ todo } />
+            <div onClick={ () => this.completeTodo(todo.id) }>
+              <Todo todo={ todo }/>
+            </div>
           )}
+          <Row>
+            <Button onClick={ () => this.deleteTodos() }>Clear Completed!</Button>
+          </Row>
       </Container>
     );
   }

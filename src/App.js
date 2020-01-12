@@ -78,7 +78,7 @@ class App extends React.Component {
             </div>
           )}
           <Row>
-            <Button onClick={ () => this.deleteTodos() }>Clear Completed!</Button>
+            <Col xs='12'><Button onClick={ () => this.deleteTodos() }>Clear Completed!</Button></Col>
           </Row>
       </Container>
     );

@@ -10,20 +10,17 @@ class App extends React.Component {
       todos: [],
       todo: ''
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.deleteTodos = this.deleteTodos.bind(this)
-    this.completeTodo = this.completeTodo.bind(this)
+    
   }
   
-  handleChange(e) {
+  handleChange = e => {
     e.preventDefault()
     this.setState({
       todo: e.target.value
     })
   }
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault()
     this.setState({
       todos: [...this.state.todos, {
@@ -34,7 +31,7 @@ class App extends React.Component {
     })
   }
 
-  deleteTodos() {
+  deleteTodos = () => {
     this.setState(state => {
       const todos = this.state.todos.filter(todo => todo.completed === false)
       return {
@@ -43,7 +40,7 @@ class App extends React.Component {
     })
   }
 
-  completeTodo(id) {
+  completeTodo = id => {
     this.setState(state => {
       const todos = this.state.todos.map(todo => {
         if (todo.id === id) {
